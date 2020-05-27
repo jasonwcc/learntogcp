@@ -49,6 +49,12 @@ h3 {
 	margin-right: auto;
 } 
 
+.trainocate .logo {
+	width: 140px;
+	float: left;
+	margin-right: 32px;
+}
+
 .hero {
 	margin-top: 172px;
 }
@@ -136,19 +142,25 @@ code {
 
 <body>
 	<div class="container">
-		<div class="hero">
-			<div style="text-align:center;">
-				<picture>
-					<source srcset="/assets/celebration-dark.svg" alt="A group celebrating" media="(prefers-color-scheme: dark)">
-					<img src="/assets/celebration.svg" alt="A group celebrating" width="427" height="231">
-				</picture>
-			</div>
+	<div class="trainocate">
+		<div style="text-align:center;">
+		<picture>
+		<img src="assets/trainocate_logo.jpg" alt="Trainocate moto and logo" width="427" height="231">
+		</picture>
+	</div>
+	<div class="hero">
+		<div style="text-align:center;">
+		<picture>
+		<source srcset="/assets/celebration-dark.svg" alt="A group celebrating" media="(prefers-color-scheme: dark)">
+		<img src="assets/celebration.svg" alt="A group celebrating" width="427" height="231">
+		</picture>
+	</div>
 
-			<div class="message">
-				<h1>It's running!</h1>
-				<h2>Congrats, you successfully deployed a container image to Cloud Run</h2>
-			</div>
-		</div>
+	<div class="message">
+		<h1>It's running!</h1>
+		<h2>Congrats, you successfully deployed a container image to Cloud Run</h2>
+	</div>
+	</div>
 
 		<div class="details">
 			<p>
@@ -161,13 +173,6 @@ code {
 				infrastructure.
 			</p>
 
-			<h3>What's next?</h3>
-			<p class="next">Follow the Quickstart tutorial to build a “Hello World” application in your favorite
-				language into
-				a container image, and then deploy it to Cloud Run.</p>
-			<p class="cta">
-				<a href="https://cloud.google.com/run/docs/quickstarts/build-and-deploy" target="_blank" rel="noopener">
-					BUILD AND DEPLOY QUICKSTART</a></p>
 		</div>
 	</div>
 </body>
