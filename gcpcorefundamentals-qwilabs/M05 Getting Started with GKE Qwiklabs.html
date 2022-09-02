@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html class="mdl-js" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Google Cloud Fundamentals: Core Infrastructure | Qwiklabs</title>
+<script>
+//<![CDATA[
+window.gon={};gon.current_user={"firstname":"Wong","lastname":"Jason","fullname":"Wong Jason","company":"Trainocate","email":"jason.wong@trainocate.com","origin":"globalknowledge-jp, direct","subscriptions":0,"id":"43d78d9bb2a8018b1506c9cb8f712ec0","qlCreatedAt":"2019-06-14 04:06:53 UTC","optIn":false,"current_organization_role":null};gon.segment=null;gon.deployment="my-globalknowledge-jp";
+//]]>
+</script>
+<script>
+  dataLayer = [
+    {user: gon.current_user},
+    {content: gon.content}
+  ];
+</script>
+<script src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/webcomponents-loader-8583b47b01e40e6ea7bf1ad443a20b7e79bbdd5e.js"></script>
+<script src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/vendor-a84bd63ebad8cbea6bda06aeebb2d8207455f1b1d832ebfc452726.js"></script>
+<script src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/application-0f6adbf5bac2c4d0eba00c59e1e5dad34e84232cc8cf1488b.js"></script>
+<script src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/hallofmirrors-2ae09d3d79271ff8176c4c2c06a8d579479b8d8bfe1f31b.js"></script>
+<custom-style>
+  <style is="custom-style">[hidden] {
+  display: none !important;
+}
+
+</style>
+</custom-style>
+<custom-style>
+  <style is="custom-style">html {
+  --layout_-_display:  flex;;
+
+      --layout-inline_-_display:  inline-flex;;
+
+      --layout-horizontal_-_display:  var(--layout_-_display); --layout-horizontal_-_-ms-flex-direction:  row; --layout-horizontal_-_-webkit-flex-direction:  row; --layout-horizontal_-_flex-direction:  row;;
+
+      --layout-horizontal-reverse_-_display:  var(--layout_-_display); --layout-horizontal-reverse_-_-ms-flex-direction:  row-reverse; --layout-horizontal-reverse_-_-webkit-flex-direction:  row-reverse; --layout-horizontal-reverse_-_flex-direction:  row-reverse;;
+
+      --layout-vertical_-_display:  var(--layout_-_display); --layout-vertical_-_-ms-flex-direction:  column; --layout-vertical_-_-webkit-flex-direction:  column; --layout-vertical_-_flex-direction:  column;;
+
+      --layout-vertical-reverse_-_display:  var(--layout_-_display); --layout-vertical-reverse_-_-ms-flex-direction:  column-reverse; --layout-vertical-reverse_-_-webkit-flex-direction:  column-reverse; --layout-vertical-reverse_-_flex-direction:  column-reverse;;
+
+      --layout-wrap_-_-ms-flex-wrap:  wrap; --layout-wrap_-_-webkit-flex-wrap:  wrap; --layout-wrap_-_flex-wrap:  wrap;;
+
+      --layout-wrap-reverse_-_-ms-flex-wrap:  wrap-reverse; --layout-wrap-reverse_-_-webkit-flex-wrap:  wrap-reverse; --layout-wrap-reverse_-_flex-wrap:  wrap-reverse;;
+
+      --layout-flex-auto_-_-ms-flex:  1 1 auto; --layout-flex-auto_-_-webkit-flex:  1 1 auto; --layout-flex-auto_-_flex:  1 1 auto;;
+
+      --layout-flex-none_-_-ms-flex:  none; --layout-flex-none_-_-webkit-flex:  none; --layout-flex-none_-_flex:  none;;
+
+      --layout-flex_-_-ms-flex:  1 1 0.000000001px; --layout-flex_-_-webkit-flex:  1; --layout-flex_-_flex:  1; --layout-flex_-_-webkit-flex-basis:  0.000000001px; --layout-flex_-_flex-basis:  0.000000001px;;
+
+      --layout-flex-2_-_-ms-flex:  2; --layout-flex-2_-_-webkit-flex:  2; --layout-flex-2_-_flex:  2;;
+
+      --layout-flex-3_-_-ms-flex:  3; --layout-flex-3_-_-webkit-flex:  3; --layout-flex-3_-_flex:  3;;
+
+      --layout-flex-4_-_-ms-flex:  4; --layout-flex-4_-_-webkit-flex:  4; --layout-flex-4_-_flex:  4;;
+
+      --layout-flex-5_-_-ms-flex:  5; --layout-flex-5_-_-webkit-flex:  5; --layout-flex-5_-_flex:  5;;
+
+      --layout-flex-6_-_-ms-flex:  6; --layout-flex-6_-_-webkit-flex:  6; --layout-flex-6_-_flex:  6;;
+
+      --layout-flex-7_-_-ms-flex:  7; --layout-flex-7_-_-webkit-flex:  7; --layout-flex-7_-_flex:  7;;
+
+      --layout-flex-8_-_-ms-flex:  8; --layout-flex-8_-_-webkit-flex:  8; --layout-flex-8_-_flex:  8;;
+
+      --layout-flex-9_-_-ms-flex:  9; --layout-flex-9_-_-webkit-flex:  9; --layout-flex-9_-_flex:  9;;
+
+      --layout-flex-10_-_-ms-flex:  10; --layout-flex-10_-_-webkit-flex:  10; --layout-flex-10_-_flex:  10;;
+
+      --layout-flex-11_-_-ms-flex:  11; --layout-flex-11_-_-webkit-flex:  11; --layout-flex-11_-_flex:  11;;
+
+      --layout-flex-12_-_-ms-flex:  12; --layout-flex-12_-_-webkit-flex:  12; --layout-flex-12_-_flex:  12;;
+
+      
+
+      --layout-start_-_-ms-flex-align:  start; --layout-start_-_-webkit-align-items:  flex-start; --layout-start_-_align-items:  flex-start;;
+
+      --layout-center_-_-ms-flex-align:  center; --layout-center_-_-webkit-align-items:  center; --layout-center_-_align-items:  center;;
+
+      --layout-end_-_-ms-flex-align:  end; --layout-end_-_-webkit-align-items:  flex-end; --layout-end_-_align-items:  flex-end;;
+
+      --layout-baseline_-_-ms-flex-align:  baseline; --layout-baseline_-_-webkit-align-items:  baseline; --layout-baseline_-_align-items:  baseline;;
+
+      
+
+      --layout-start-justified_-_-ms-flex-pack:  start; --layout-start-justified_-_-webkit-justify-content:  flex-start; --layout-start-justified_-_justify-content:  flex-start;;
+
+      --layout-center-justified_-_-ms-flex-pack:  center; --layout-center-justified_-_-webkit-justify-content:  center; --layout-center-justified_-_justify-content:  center;;
+
+      --layout-end-justified_-_-ms-flex-pack:  end; --layout-end-justified_-_-webkit-justify-content:  flex-end; --layout-end-justified_-_justify-content:  flex-end;;
+
+      --layout-around-justified_-_-ms-flex-pack:  distribute; --layout-around-justified_-_-webkit-justify-content:  space-around; --layout-around-justified_-_justify-content:  space-around;;
+
+      --layout-justified_-_-ms-flex-pack:  justify; --layout-justified_-_-webkit-justify-content:  space-between; --layout-justified_-_justify-content:  space-between;;
+
+      --layout-center-center_-_-ms-flex-align:  var(--layout-center_-_-ms-flex-align); --layout-center-center_-_-webkit-align-items:  var(--layout-center_-_-webkit-align-items); --layout-center-center_-_align-items:  var(--layout-center_-_align-items); --layout-center-center_-_-ms-flex-pack:  var(--layout-center-justified_-_-ms-flex-pack); --layout-center-center_-_-webkit-justify-content:  var(--layout-center-justified_-_-webkit-justify-content); --layout-center-center_-_justify-content:  var(--layout-center-justified_-_justify-content);;
+
+      
+
+      --layout-self-start_-_-ms-align-self:  flex-start; --layout-self-start_-_-webkit-align-self:  flex-start; --layout-self-start_-_align-self:  flex-start;;
+
+      --layout-self-center_-_-ms-align-self:  center; --layout-self-center_-_-webkit-align-self:  center; --layout-self-center_-_align-self:  center;;
+
+      --layout-self-end_-_-ms-align-self:  flex-end; --layout-self-end_-_-webkit-align-self:  flex-end; --layout-self-end_-_align-self:  flex-end;;
+
+      --layout-self-stretch_-_-ms-align-self:  stretch; --layout-self-stretch_-_-webkit-align-self:  stretch; --layout-self-stretch_-_align-self:  stretch;;
+
+      --layout-self-baseline_-_-ms-align-self:  baseline; --layout-self-baseline_-_-webkit-align-self:  baseline; --layout-self-baseline_-_align-self:  baseline;;
+
+      
+
+      --layout-start-aligned_-_-ms-flex-line-pack:  start; --layout-start-aligned_-_-ms-align-content:  flex-start; --layout-start-aligned_-_-webkit-align-content:  flex-start; --layout-start-aligned_-_align-content:  flex-start;;
+
+      --layout-end-aligned_-_-ms-flex-line-pack:  end; --layout-end-aligned_-_-ms-align-content:  flex-end; --layout-end-aligned_-_-webkit-align-content:  flex-end; --layout-end-aligned_-_align-content:  flex-end;;
+
+      --layout-center-aligned_-_-ms-flex-line-pack:  center; --layout-center-aligned_-_-ms-align-content:  center; --layout-center-aligned_-_-webkit-align-content:  center; --layout-center-aligned_-_align-content:  center;;
+
+      --layout-between-aligned_-_-ms-flex-line-pack:  justify; --layout-between-aligned_-_-ms-align-content:  space-between; --layout-between-aligned_-_-webkit-align-content:  space-between; --layout-between-aligned_-_align-content:  space-between;;
+
+      --layout-around-aligned_-_-ms-flex-line-pack:  distribute; --layout-around-aligned_-_-ms-align-content:  space-around; --layout-around-aligned_-_-webkit-align-content:  space-around; --layout-around-aligned_-_align-content:  space-around;;
+
+      
+
+      --layout-block_-_display:  block;;
+
+      --layout-invisible_-_visibility:  hidden !important;;
+
+      --layout-relative_-_position:  relative;;
+
+      --layout-fit_-_position:  absolute; --layout-fit_-_top:  0; --layout-fit_-_right:  0; --layout-fit_-_bottom:  0; --layout-fit_-_left:  0;;
+
+      --layout-scroll_-_-webkit-overflow-scrolling:  touch; --layout-scroll_-_overflow:  auto;;
+
+      --layout-fullbleed_-_margin:  0; --layout-fullbleed_-_height:  100vh;;
+
+      
+
+      --layout-fixed-top_-_position:  fixed; --layout-fixed-top_-_top:  0; --layout-fixed-top_-_left:  0; --layout-fixed-top_-_right:  0;;
+
+      --layout-fixed-right_-_position:  fixed; --layout-fixed-right_-_top:  0; --layout-fixed-right_-_right:  0; --layout-fixed-right_-_bottom:  0;;
+
+      --layout-fixed-bottom_-_position:  fixed; --layout-fixed-bottom_-_right:  0; --layout-fixed-bottom_-_bottom:  0; --layout-fixed-bottom_-_left:  0;;
+
+      --layout-fixed-left_-_position:  fixed; --layout-fixed-left_-_top:  0; --layout-fixed-left_-_bottom:  0; --layout-fixed-left_-_left:  0;;
+}
+
+</style>
+</custom-style><style>[hidden] { display: none !important; }</style><custom-style>
+  <style is="custom-style">html {
+  --google-red-100: #f4c7c3;
+      --google-red-300: #e67c73;
+      --google-red-500: #db4437;
+      --google-red-700: #c53929;
+
+      --google-blue-100: #c6dafc;
+      --google-blue-300: #7baaf7;
+      --google-blue-500: #4285f4;
+      --google-blue-700: #3367d6;
+
+      --google-green-100: #b7e1cd;
+      --google-green-300: #57bb8a;
+      --google-green-500: #0f9d58;
+      --google-green-700: #0b8043;
+
+      --google-yellow-100: #fce8b2;
+      --google-yellow-300: #f7cb4d;
+      --google-yellow-500: #f4b400;
+      --google-yellow-700: #f09300;
+
+      --google-grey-100: #f5f5f5;
+      --google-grey-300: #e0e0e0;
+      --google-grey-500: #9e9e9e;
+      --google-grey-700: #616161;
+
+      
+
+      --paper-red-50: #ffebee;
+      --paper-red-100: #ffcdd2;
+      --paper-red-200: #ef9a9a;
+      --paper-red-300: #e57373;
+      --paper-red-400: #ef5350;
+      --paper-red-500: #f44336;
+      --paper-red-600: #e53935;
+      --paper-red-700: #d32f2f;
+      --paper-red-800: #c62828;
+      --paper-red-900: #b71c1c;
+      --paper-red-a100: #ff8a80;
+      --paper-red-a200: #ff5252;
+      --paper-red-a400: #ff1744;
+      --paper-red-a700: #d50000;
+
+      --paper-pink-50: #fce4ec;
+      --paper-pink-100: #f8bbd0;
+      --paper-pink-200: #f48fb1;
+      --paper-pink-300: #f06292;
+      --paper-pink-400: #ec407a;
+      --paper-pink-500: #e91e63;
+      --paper-pink-600: #d81b60;
+      --paper-pink-700: #c2185b;
+      --paper-pink-800: #ad1457;
+      --paper-pink-900: #880e4f;
+      --paper-pink-a100: #ff80ab;
+      --paper-pink-a200: #ff4081;
+      --paper-pink-a400: #f50057;
+      --paper-pink-a700: #c51162;
+
+      --paper-purple-50: #f3e5f5;
+      --paper-purple-100: #e1bee7;
+      --paper-purple-200: #ce93d8;
+      --paper-purple-300: #ba68c8;
+      --paper-purple-400: #ab47bc;
+      --paper-purple-500: #9c27b0;
+      --paper-purple-600: #8e24aa;
+      --paper-purple-700: #7b1fa2;
+      --paper-purple-800: #6a1b9a;
+      --paper-purple-900: #4a148c;
+      --paper-purple-a100: #ea80fc;
+      --paper-purple-a200: #e040fb;
+      --paper-purple-a400: #d500f9;
+      --paper-purple-a700: #aa00ff;
+
+      --paper-deep-purple-50: #ede7f6;
+      --paper-deep-purple-100: #d1c4e9;
+      --paper-deep-purple-200: #b39ddb;
+      --paper-deep-purple-300: #9575cd;
+      --paper-deep-purple-400: #7e57c2;
+      --paper-deep-purple-500: #673ab7;
+      --paper-deep-purple-600: #5e35b1;
+      --paper-deep-purple-700: #512da8;
+      --paper-deep-purple-800: #4527a0;
+      --paper-deep-purple-900: #311b92;
+      --paper-deep-purple-a100: #b388ff;
+      --paper-deep-purple-a200: #7c4dff;
+      --paper-deep-purple-a400: #651fff;
+      --paper-deep-purple-a700: #6200ea;
+
+      --paper-indigo-50: #e8eaf6;
+      --paper-indigo-100: #c5cae9;
+      --paper-indigo-200: #9fa8da;
+      --paper-indigo-300: #7986cb;
+      --paper-indigo-400: #5c6bc0;
+      --paper-indigo-500: #3f51b5;
+      --paper-indigo-600: #3949ab;
+      --paper-indigo-700: #303f9f;
+      --paper-indigo-800: #283593;
+      --paper-indigo-900: #1a237e;
+      --paper-indigo-a100: #8c9eff;
+      --paper-indigo-a200: #536dfe;
+      --paper-indigo-a400: #3d5afe;
+      --paper-indigo-a700: #304ffe;
+
+      --paper-blue-50: #e3f2fd;
+      --paper-blue-100: #bbdefb;
+      --paper-blue-200: #90caf9;
+      --paper-blue-300: #64b5f6;
+      --paper-blue-400: #42a5f5;
+      --paper-blue-500: #2196f3;
+      --paper-blue-600: #1e88e5;
+      --paper-blue-700: #1976d2;
+      --paper-blue-800: #1565c0;
+      --paper-blue-900: #0d47a1;
+      --paper-blue-a100: #82b1ff;
+      --paper-blue-a200: #448aff;
+      --paper-blue-a400: #2979ff;
+      --paper-blue-a700: #2962ff;
+
+      --paper-light-blue-50: #e1f5fe;
+      --paper-light-blue-100: #b3e5fc;
+      --paper-light-blue-200: #81d4fa;
+      --paper-light-blue-300: #4fc3f7;
+      --paper-light-blue-400: #29b6f6;
+      --paper-light-blue-500: #03a9f4;
+      --paper-light-blue-600: #039be5;
+      --paper-light-blue-700: #0288d1;
+      --paper-light-blue-800: #0277bd;
+      --paper-light-blue-900: #01579b;
+      --paper-light-blue-a100: #80d8ff;
+      --paper-light-blue-a200: #40c4ff;
+      --paper-light-blue-a400: #00b0ff;
+      --paper-light-blue-a700: #0091ea;
+
+      --paper-cyan-50: #e0f7fa;
+      --paper-cyan-100: #b2ebf2;
+      --paper-cyan-200: #80deea;
+      --paper-cyan-300: #4dd0e1;
+      --paper-cyan-400: #26c6da;
+      --paper-cyan-500: #00bcd4;
+      --paper-cyan-600: #00acc1;
+      --paper-cyan-700: #0097a7;
+      --paper-cyan-800: #00838f;
+      --paper-cyan-900: #006064;
+      --paper-cyan-a100: #84ffff;
+      --paper-cyan-a200: #18ffff;
+      --paper-cyan-a400: #00e5ff;
+      --paper-cyan-a700: #00b8d4;
+
+      --paper-teal-50: #e0f2f1;
+      --paper-teal-100: #b2dfdb;
+      --paper-teal-200: #80cbc4;
+      --paper-teal-300: #4db6ac;
+      --paper-teal-400: #26a69a;
+      --paper-teal-500: #009688;
+      --paper-teal-600: #00897b;
+      --paper-teal-700: #00796b;
+      --paper-teal-800: #00695c;
+      --paper-teal-900: #004d40;
+      --paper-teal-a100: #a7ffeb;
+      --paper-teal-a200: #64ffda;
+      --paper-teal-a400: #1de9b6;
+      --paper-teal-a700: #00bfa5;
+
+      --paper-green-50: #e8f5e9;
+      --paper-green-100: #c8e6c9;
+      --paper-green-200: #a5d6a7;
+      --paper-green-300: #81c784;
+      --paper-green-400: #66bb6a;
+      --paper-green-500: #4caf50;
+      --paper-green-600: #43a047;
+      --paper-green-700: #388e3c;
+      --paper-green-800: #2e7d32;
+      --paper-green-900: #1b5e20;
+      --paper-green-a100: #b9f6ca;
+      --paper-green-a200: #69f0ae;
+      --paper-green-a400: #00e676;
+      --paper-green-a700: #00c853;
+
+      --paper-light-green-50: #f1f8e9;
+      --paper-light-green-100: #dcedc8;
+      --paper-light-green-200: #c5e1a5;
+      --paper-light-green-300: #aed581;
+      --paper-light-green-400: #9ccc65;
+      --paper-light-green-500: #8bc34a;
+      --paper-light-green-600: #7cb342;
+      --paper-light-green-700: #689f38;
+      --paper-light-green-800: #558b2f;
+      --paper-light-green-900: #33691e;
+      --paper-light-green-a100: #ccff90;
+      --paper-light-green-a200: #b2ff59;
+      --paper-light-green-a400: #76ff03;
+      --paper-light-green-a700: #64dd17;
+
+      --paper-lime-50: #f9fbe7;
+      --paper-lime-100: #f0f4c3;
+      --paper-lime-200: #e6ee9c;
+      --paper-lime-300: #dce775;
+      --paper-lime-400: #d4e157;
+      --paper-lime-500: #cddc39;
+      --paper-lime-600: #c0ca33;
+      --paper-lime-700: #afb42b;
+      --paper-lime-800: #9e9d24;
+      --paper-lime-900: #827717;
+      --paper-lime-a100: #f4ff81;
+      --paper-lime-a200: #eeff41;
+      --paper-lime-a400: #c6ff00;
+      --paper-lime-a700: #aeea00;
+
+      --paper-yellow-50: #fffde7;
+      --paper-yellow-100: #fff9c4;
+      --paper-yellow-200: #fff59d;
+      --paper-yellow-300: #fff176;
+      --paper-yellow-400: #ffee58;
+      --paper-yellow-500: #ffeb3b;
+      --paper-yellow-600: #fdd835;
+      --paper-yellow-700: #fbc02d;
+      --paper-yellow-800: #f9a825;
+      --paper-yellow-900: #f57f17;
+      --paper-yellow-a100: #ffff8d;
+      --paper-yellow-a200: #ffff00;
+      --paper-yellow-a400: #ffea00;
+      --paper-yellow-a700: #ffd600;
+
+      --paper-amber-50: #fff8e1;
+      --paper-amber-100: #ffecb3;
+      --paper-amber-200: #ffe082;
+      --paper-amber-300: #ffd54f;
+      --paper-amber-400: #ffca28;
+      --paper-amber-500: #ffc107;
+      --paper-amber-600: #ffb300;
+      --paper-amber-700: #ffa000;
+      --paper-amber-800: #ff8f00;
+      --paper-amber-900: #ff6f00;
+      --paper-amber-a100: #ffe57f;
+      --paper-amber-a200: #ffd740;
+      --paper-amber-a400: #ffc400;
+      --paper-amber-a700: #ffab00;
+
+      --paper-orange-50: #fff3e0;
+      --paper-orange-100: #ffe0b2;
+      --paper-orange-200: #ffcc80;
+      --paper-orange-300: #ffb74d;
+      --paper-orange-400: #ffa726;
+      --paper-orange-500: #ff9800;
+      --paper-orange-600: #fb8c00;
+      --paper-orange-700: #f57c00;
+      --paper-orange-800: #ef6c00;
+      --paper-orange-900: #e65100;
+      --paper-orange-a100: #ffd180;
+      --paper-orange-a200: #ffab40;
+      --paper-orange-a400: #ff9100;
+      --paper-orange-a700: #ff6500;
+
+      --paper-deep-orange-50: #fbe9e7;
+      --paper-deep-orange-100: #ffccbc;
+      --paper-deep-orange-200: #ffab91;
+      --paper-deep-orange-300: #ff8a65;
+      --paper-deep-orange-400: #ff7043;
+      --paper-deep-orange-500: #ff5722;
+      --paper-deep-orange-600: #f4511e;
+      --paper-deep-orange-700: #e64a19;
+      --paper-deep-orange-800: #d84315;
+      --paper-deep-orange-900: #bf360c;
+      --paper-deep-orange-a100: #ff9e80;
+      --paper-deep-orange-a200: #ff6e40;
+      --paper-deep-orange-a400: #ff3d00;
+      --paper-deep-orange-a700: #dd2c00;
+
+      --paper-brown-50: #efebe9;
+      --paper-brown-100: #d7ccc8;
+      --paper-brown-200: #bcaaa4;
+      --paper-brown-300: #a1887f;
+      --paper-brown-400: #8d6e63;
+      --paper-brown-500: #795548;
+      --paper-brown-600: #6d4c41;
+      --paper-brown-700: #5d4037;
+      --paper-brown-800: #4e342e;
+      --paper-brown-900: #3e2723;
+
+      --paper-grey-50: #fafafa;
+      --paper-grey-100: #f5f5f5;
+      --paper-grey-200: #eeeeee;
+      --paper-grey-300: #e0e0e0;
+      --paper-grey-400: #bdbdbd;
+      --paper-grey-500: #9e9e9e;
+      --paper-grey-600: #757575;
+      --paper-grey-700: #616161;
+      --paper-grey-800: #424242;
+      --paper-grey-900: #212121;
+
+      --paper-blue-grey-50: #eceff1;
+      --paper-blue-grey-100: #cfd8dc;
+      --paper-blue-grey-200: #b0bec5;
+      --paper-blue-grey-300: #90a4ae;
+      --paper-blue-grey-400: #78909c;
+      --paper-blue-grey-500: #607d8b;
+      --paper-blue-grey-600: #546e7a;
+      --paper-blue-grey-700: #455a64;
+      --paper-blue-grey-800: #37474f;
+      --paper-blue-grey-900: #263238;
+
+      
+      --dark-divider-opacity: 0.12;
+      --dark-disabled-opacity: 0.38; 
+      --dark-secondary-opacity: 0.54;
+      --dark-primary-opacity: 0.87;
+
+      
+      --light-divider-opacity: 0.12;
+      --light-disabled-opacity: 0.3; 
+      --light-secondary-opacity: 0.7;
+      --light-primary-opacity: 1.0;
+}
+
+</style>
+</custom-style><custom-style>
+  <style is="custom-style">html {
+  --primary-text-color: var(--light-theme-text-color);
+      --primary-background-color: var(--light-theme-background-color);
+      --secondary-text-color: var(--light-theme-secondary-color);
+      --disabled-text-color: var(--light-theme-disabled-color);
+      --divider-color: var(--light-theme-divider-color);
+      --error-color: var(--paper-deep-orange-a700);
+
+      
+      --primary-color: var(--paper-indigo-500);
+      --light-primary-color: var(--paper-indigo-100);
+      --dark-primary-color: var(--paper-indigo-700);
+
+      --accent-color: var(--paper-pink-a200);
+      --light-accent-color: var(--paper-pink-a100);
+      --dark-accent-color: var(--paper-pink-a400);
+
+
+      
+      --light-theme-background-color: #ffffff;
+      --light-theme-base-color: #000000;
+      --light-theme-text-color: var(--paper-grey-900);
+      --light-theme-secondary-color: #737373;  
+      --light-theme-disabled-color: #9b9b9b;  
+      --light-theme-divider-color: #dbdbdb;
+
+      
+      --dark-theme-background-color: var(--paper-grey-900);
+      --dark-theme-base-color: #ffffff;
+      --dark-theme-text-color: #ffffff;
+      --dark-theme-secondary-color: #bcbcbc;  
+      --dark-theme-disabled-color: #646464;  
+      --dark-theme-divider-color: #3c3c3c;
+
+      
+      --text-primary-color: var(--dark-theme-text-color);
+      --default-primary-color: var(--primary-color);
+}
+
+</style>
+</custom-style><script async="" src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/lazy.min.js"></script><script src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/loader.js"></script>
+<!--[if lt IE 9]>
+<script src='http://html5shim.googlecode.com/svn/trunk/html5.js' type='text/javascript'></script>
+<![endif]-->
+<!--[endif]>  <![endif]-->
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "WebSite",
+  "url": "https://www.qwiklabs.com/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://www.qwiklabs.com/catalog?keywords={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<script id="ze-snippet" src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/snippet.js"></script>
+
+
+<meta name="csrf-param" content="authenticity_token">
+<meta name="csrf-token" content="6y/xzapAio1d7+bLI2HI7+i54KH+6s/U7gTgLADmjMfI/pmjETceaJiBVJOuvm2wFRCyd3IQpisfcAsNNBGKjg==">
+<meta content="width=device-width, initial-scale=1.0, user-scalable=yes" name="viewport">
+<meta content="1rRsY0INj8RvwB5EF5pwdxt2A2P9aDgAlsICaJ0d5w0" name="google-site-verification">
+<meta content="#3681E4" property="msapplication-TileColor">
+<meta content="/favicon-144.png" property="msapplication-TileImage">
+<meta content="[{&quot;id&quot;:&quot;recaptcha_experiment&quot;,&quot;optimize_id&quot;:&quot;dpViOcLkT3qS4TvL2mRojA&quot;,&quot;title&quot;:&quot;No Recaptcha shown for trusted users&quot;,&quot;variant_index&quot;:1,&quot;variant&quot;:&quot;no_recaptcha&quot;}]" name="active-experiments">
+<meta content="{&quot;userId&quot;:1958}" name="help-api-product-data">
+<meta content="Qwiklabs provides real cloud environments that help developers and IT professionals learn cloud platforms and software, such as Firebase, Kubernetes and more." name="description">
+<meta content="Qwiklabs" name="author">
+<meta content="Google Cloud Fundamentals: Core Infrastructure | Qwiklabs" property="og:title">
+<meta content="website" property="og:type">
+<meta content="/favicon-144.png" property="og:image">
+<meta content="Qwiklabs" property="og:site_name">
+<meta content="Qwiklabs provides real cloud environments that help developers and IT professionals learn cloud platforms and software, such as Firebase, Kubernetes and more." property="og:description">
+<meta content="/qwiklabs_logo_900x887.png" property="og:logo" size="900x887">
+<meta content="/qwiklabs_logo_994x187.png" property="og:logo" size="994x187">
+
+
+
+<link color="#3681E4" href="https://my-trainocate.qwiklabs.com/favicon-svg.svg" rel="mask-icon">
+<link href="https://my-trainocate.qwiklabs.com/favicon-180.png" rel="apple-touch-icon-precomposed">
+<link href="https://my-trainocate.qwiklabs.com/favicon-32.png" rel="shortcut icon" type="image/x-icon">
+
+
+
+<link rel="stylesheet" media="screen" href="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/css.css">
+
+
+<link rel="stylesheet" media="all" href="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/application-c0be043d1b319b691bb0c41d1bc7bd873e88461a497a8e15.css">
+
+<style>
+  :root {
+    --primary-text-on-surface-color: #1A73E8;
+    --primary-text-on-surface-color-dark: #1568d6;
+    --primary-text-on-surface-color-darker: #135ec1;
+    --primary-text-on-surface-color-darkest: #1154ac;
+    --primary-surface-color: #1A73E8;
+    --primary-surface-color-rgb: 26,115,232;
+    --primary-surface-color-light: #d1e3fa;
+    --primary-surface-color-lightest: #e8f1fd;
+    --text-on-primary-color: #FFFFFF;
+    --accent-text-on-surface-color: #F29900;
+    --accent-surface-color: #F9AB00;
+    --accent-surface-color-rgb: 249,171,0;
+    --accent-surface-color-light: #ffefcc;
+    --text-on-accent-color: #202124;
+  }
+</style>
+
+
+
+</head>
+<body class="l-dense classroom-body application-new ilt-classrooms-focuses ilt-classrooms-focuses-show l-dense classroom-body ">
+<div class="header-container">
+<div class="header">
+<ql-icon-button class="js-nav-toggle header__nav-panel-button l-mrm">menu</ql-icon-button>
+<div class="header__title">
+<ql-icon-button label="Back" href="/classrooms" id="0caf7b3d25d695cd" target="_self" tip="Back">arrow_back</ql-icon-button>
+<h1 class="headline-5">
+Google Cloud Fundamentals: Core Infrastructure
+</h1>
+</div>
+<div class="header__actions">
+<ql-icon-button label="Activate all labs" href="/classrooms/5061/activate_all" id="play_circle_outline-header" target="_self" tip="Activate all labs" method="post">play_circle_outline</ql-icon-button>
+<ql-icon-button label="Deactivate all labs" href="/classrooms/5061/deactivate_all" id="pause_circle_outline-header" target="_self" tip="Deactivate all labs" method="post">pause_circle_outline</ql-icon-button>
+<ql-icon-button data-target="#classroom_student_quick_add" data-toggle="modal" id="quick-add" tip="Add a student">
+person_add
+</ql-icon-button>
+<div class="header__menu">
+<ql-icon-button id="header_menu">more_vert</ql-icon-button>
+<div class="mdl-menu__container is-upgraded"><div class="mdl-menu__outline mdl-menu--bottom-right"></div><ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu" for="header_menu" data-upgraded=",MaterialMenu">
+<li class="mdl-menu__item header__menu__item" tabindex="-1">
+<a data-target="#set_desired_hotlabs" data-toggle="modal">
+Set Desired Hotlabs
+</a>
+</li>
+<li class="mdl-menu__item header__menu__item" tabindex="-1"><a href="https://my-trainocate.qwiklabs.com/classrooms/5061/edit">Manage Classroom Details</a></li>
+<li class="mdl-menu__item header__menu__item" tabindex="-1"><a href="https://my-trainocate.qwiklabs.com/authoring/classroom_templates/2216">View Classroom Template</a></li>
+<li class="mdl-menu__item header__menu__item" tabindex="-1"><a href="https://my-trainocate.qwiklabs.com/classrooms/5061/students_assessment_report">Download Assessment Report</a></li>
+
+</ul></div>
+</div>
+
+<ql-icon-button class="mobile-hide" icon="help_outline" id="help-menu-button" label="Open help menu" tip="Help"></ql-icon-button>
+<ql-menu for="help-menu-button" id="help-menu" style="left: -1000px; top: -1000px; opacity: 0; visibility: hidden;" tabindex="-1" aria-hidden="true" role="menu" aria-labelledby="help-menu-button">
+<ql-menu-item data-analytics-action="opened_help" data-analytics-label="" label="Help Center" onclick='hallofmirrors.helpService.startHelp({"productData":{"userId":1958},"context":""})'></ql-menu-item>
+<ql-menu-item href="https://support.google.com/qwiklabs/contact/contact_us" label="Email support" target="_blank"></ql-menu-item>
+<ql-menu-item label="Chat support" onclick="ql.chat.open()"></ql-menu-item>
+</ql-menu>
+
+<ql-icon-button class="mobile-hide" icon="language" id="language" label="Select your language preference" tip="Language"></ql-icon-button>
+<ql-menu for="language" style="left: -1000px; top: -1000px; opacity: 0; visibility: hidden;" tabindex="-1" aria-hidden="true" role="menu" aria-labelledby="language">
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="ar" href="/ilt/classrooms/5061/focuses/32694?locale=ar" label="العربية‬‎" lang="ar"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="de" href="/ilt/classrooms/5061/focuses/32694?locale=de" label="Deutsch" lang="de"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="en" href="/ilt/classrooms/5061/focuses/32694?locale=en" label="English" lang="en"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="es" href="/ilt/classrooms/5061/focuses/32694?locale=es" label="español (Latinoamérica)" lang="es"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="fr" href="/ilt/classrooms/5061/focuses/32694?locale=fr" label="français" lang="fr"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="fr_CA" href="/ilt/classrooms/5061/focuses/32694?locale=fr_CA" label="français (Canada)" lang="fr-CA"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="he" href="/ilt/classrooms/5061/focuses/32694?locale=he" label="עברית" lang="he"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="id" href="/ilt/classrooms/5061/focuses/32694?locale=id" label="bahasa Indonesia" lang="id"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="it" href="/ilt/classrooms/5061/focuses/32694?locale=it" label="Italiano" lang="it"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="ja" href="/ilt/classrooms/5061/focuses/32694?locale=ja" label="日本語" lang="ja"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="ko" href="/ilt/classrooms/5061/focuses/32694?locale=ko" label="한국어" lang="ko"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="pl" href="/ilt/classrooms/5061/focuses/32694?locale=pl" label="Polski" lang="pl"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="pt_BR" href="/ilt/classrooms/5061/focuses/32694?locale=pt_BR" label="português (Brasil)" lang="pt-BR"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="pt_PT" href="/ilt/classrooms/5061/focuses/32694?locale=pt_PT" label="português (Portugal)" lang="pt-PT"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="ru" href="/ilt/classrooms/5061/focuses/32694?locale=ru" label="русский" lang="ru"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="tr" href="/ilt/classrooms/5061/focuses/32694?locale=tr" label="Türkçe" lang="tr"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="uk" href="/ilt/classrooms/5061/focuses/32694?locale=uk" label="український" lang="uk"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="zh" href="/ilt/classrooms/5061/focuses/32694?locale=zh" label="简体中文" lang="zh"></ql-menu-item>
+<ql-menu-item data-analytics-action="changed_locale" data-analytics-label="zh_TW" href="/ilt/classrooms/5061/focuses/32694?locale=zh_TW" label="繁體中文" lang="zh-TW"></ql-menu-item>
+</ql-menu>
+
+<ql-icon-button id="my_account" label="My account" tip="My account">
+<ql-avatar></ql-avatar>
+</ql-icon-button>
+<ql-menu for="my_account" id="my_account_menu" style="max-height: 640px; left: -1000px; top: -1000px; opacity: 0; visibility: hidden;" tabindex="-1" aria-hidden="true" role="menu" aria-labelledby="my_account">
+<div class="my-account-menu">
+<ql-avatar class="l-mtl l-mbl" size="120"></ql-avatar>
+<div class="my-account-menu__user-info l-mbl">
+<h4 class="ql-subhead-1">Wong Jason</h4>
+<p class="ql-body-2 text--light">jason.wong@trainocate.com</p>
+<p class="ql-body-2 text--light">
+Trainer
+</p>
+</div>
+<div class="buttons l-mbl">
+<a class="button button--hairline" id="settings" href="https://my-trainocate.qwiklabs.com/my_account/profile">Settings</a>
+</div>
+<hr>
+<ql-button data-analytics-action="clicked_sign_out" href="/users/sign_out" method="delete">
+Sign Out
+</ql-button>
+<div class="privacy l-mtl">
+<a target="_blank" class="ql-caption text--light" href="https://my-trainocate.qwiklabs.com/privacy_policy">Privacy</a>
+<span class="ql-caption text--light l-mls l-mrs">·</span>
+<a class="ql-caption text--light" href="https://my-trainocate.qwiklabs.com/terms_of_service">Terms</a>
+</div>
+</div>
+</ql-menu>
+
+</div>
+</div>
+</div>
+
+<nav class="nav-panel js-nav-panel">
+<div class="nav-panel__logo">
+<div class="custom-logo"><img alt="Qwiklabs" aria-label="Qwiklabs" src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/xwTUDdCNeViKyksjsJAiyDhEEMzCTEFijLfasL66wlw=.png" height="24"></div>
+</div>
+<nav class="ql-sidenav">
+<ql-sidenav-item href="/" icon="home" label="Home"></ql-sidenav-item>
+
+<ql-sidenav-item href="/catalog" icon="school" label="Catalog"></ql-sidenav-item>
+
+<ql-sidenav-item href="/profile" icon="event_note" label="Profile"></ql-sidenav-item>
+
+<hr>
+<ql-sidenav-item href="/labs" icon="edit" label="Authoring"></ql-sidenav-item>
+
+<ql-sidenav-item active="" href="/classrooms" icon="today" label="Classrooms"></ql-sidenav-item>
+
+</nav>
+
+</nav>
+<div class="nav-panel__overlay js-nav-toggle"></div>
+
+<main class="js-main" id="jump-content">
+<div class="l-main-wrapper" id="main-wrapper">
+<div class="classroom card elevation-0">
+<div class="classroom__header tabs">
+<a class="tab is-active" aria-current="page" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses">Labs</a>
+<a class="tab" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/notes">Lecture Notes</a>
+<a class="tab" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/students">Students (129)</a>
+</div>
+<div class="classroom__content">
+<div class="classroom__content__inner">
+<div class="l-classroom__sidebar">
+<div class="classroom__sidebar clasroom__sidebar--labs">
+<table>
+<tbody data-update-url="https://my-trainocate.qwiklabs.com/focuses/sort" id="">
+<tr class="focus" id="focus_32690">
+<td class="handle" style="padding: 0;">
+<a id="focus_32690" class="classroom__index-item" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32690"><div class="classroom__labs__lab__dot" style="background-color: #0F9D58;"></div>
+<div class="title">
+<span>Google Cloud Fundamentals: Getting Started with Cloud Marketplace</span>
+<span class="classroom__labs__lab__details js-lab-details"></span>
+</div>
+</a></td>
+</tr>
+<tr class="focus" id="focus_32691">
+<td class="handle" style="padding: 0;">
+<a id="focus_32691" class="classroom__index-item" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32691"><div class="classroom__labs__lab__dot" style="background-color: #0F9D58;"></div>
+<div class="title">
+<span>Getting Started with VPC Networking and Google Compute Engine</span>
+<span class="classroom__labs__lab__details js-lab-details"></span>
+</div>
+</a></td>
+</tr>
+<tr class="focus" id="focus_32692">
+<td class="handle" style="padding: 0;">
+<a id="focus_32692" class="classroom__index-item" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32692"><div class="classroom__labs__lab__dot" style="background-color: #0F9D58;"></div>
+<div class="title">
+<span>Google Cloud Fundamentals: Getting Started with Cloud Storage and Cloud SQL</span>
+<span class="classroom__labs__lab__details js-lab-details"></span>
+</div>
+</a></td>
+</tr>
+<tr class="focus" id="focus_32693">
+<td class="handle" style="padding: 0;">
+<a id="focus_32693" class="classroom__index-item" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32693"><div class="classroom__labs__lab__dot" style="background-color: #0F9D58;"></div>
+<div class="title">
+<span>Google Cloud Fundamentals: Getting Started with GKE</span>
+<span class="classroom__labs__lab__details js-lab-details"></span>
+</div>
+</a></td>
+</tr>
+<tr class="focus" id="focus_32694">
+<td class="handle" style="padding: 0;">
+<a id="focus_32694" class="classroom__index-item active" aria-current="page" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32694"><div class="classroom__labs__lab__dot" style="background-color: #0F9D58;"></div>
+<div class="title">
+<span>Hello Cloud Run [APPRUN]</span>
+<span class="classroom__labs__lab__details js-lab-details"></span>
+</div>
+</a></td>
+</tr>
+<tr class="focus" id="focus_32695">
+<td class="handle" style="padding: 0;">
+<a id="focus_32695" class="classroom__index-item" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32695"><div class="classroom__labs__lab__dot" style="background-color: #0F9D58;"></div>
+<div class="title">
+<span>Automating the Deployment of Infrastructure Using Terraform</span>
+<span class="classroom__labs__lab__details js-lab-details"></span>
+</div>
+</a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="l-classroom__main">
+<div class="classroom__main classroom__main--lab">
+<h1 class="classroom__lab__title">
+Hello Cloud Run [APPRUN]
+</h1>
+<div class="classroom__lab__actions">
+<div class="js-hotlabs-button"><ql-button class="l-mrl" disabled="" icon="local_fire_department" id="no_labs" tabindex="0">
+Pre-Warm Labs
+</ql-button>
+<div class="mdl-tooltip" data-mdl-for="no_labs" data-upgraded=",MaterialTooltip">
+Please increase the desired number of hotlabs to make more.
+</div>
+</div>
+<a target="_blank" class="button l-mrl" href="https://my-trainocate.qwiklabs.com/focuses/32694">Open Lab</a>
+<a class="button is-active" rel="nofollow" data-method="patch" href="https://my-trainocate.qwiklabs.com/focuses/toggle_lab_state/32694">Deactivate Lab</a>
+</div>
+<p class="classroom__lab__hotlabs js-hotlabs"></p>
+<p class="classroom__lab__description">
+In this lab you'll learn how to get started with Cloud Run by deploying 
+and running a stateless container serverless-ly (with the infrastructure
+ abstracted away).
+</p>
+<div class="mdl-card card--table classroom__lab__table l-mbl js-student-table" data-student-statuses-path="/ilt/classrooms/5061/focuses/32694.json">
+<div class="mdl-card__title">
+<h2 class="mdl-typography--title js-student-table-title">
+Students
+<span class="light">
+0 labs running.
+</span>
+</h2>
+<div class="classroom__lab__student-actions js-student-actions-container">
+<ql-button class="js-add-time" text="">
+Add 10 Minutes
+</ql-button>
+<ql-button class="js-end-lab" confirmation="Are you sure you want to end student's lab?" text="">
+End Student's Lab
+</ql-button>
+</div>
+</div>
+<div class="mdl-card__supporting-text">
+<div class="mdl-table js-student-table">
+<div class="flex-table__row flex-table__row--header">
+<div class="td classroom__lab__student-row__select"></div>
+<div class="td">Student</div>
+<div class="td">Status</div>
+</div>
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36623" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+., Siraj
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36568" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Aatithan, Kukaneswara Sarma
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="7102" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Agampodi, Kalpika
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36633" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Ahmad Khairi, Mohd Khairul Hilmi
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36567" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Arisandy, Dani
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36581" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Atiqah, Nazwa
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36578" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Aureada, Reynante
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36617" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Avellano, Constantin
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36622" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Aziz, Fakhrul
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36575" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Balasubramanian, Nivedha
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="18178" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Bandarage, Ajith
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36613" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Bernabe, Jeferson
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36604" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Bhatta, Binamra
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36606" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Bin Amir, Mohamad Adli
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36629" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Chan, Chuey Hwye
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36638" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+danial, izzani 
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36630" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Darwish, Haikal
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36639" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Duen, Lim
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36626" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Faris, Tuan
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36627" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+ghazali, norliza
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36566" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Ginete, John Paulo
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36597" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+harun, hayati
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36579" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Hidayat, Mohamed 
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36640" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Hilman, Ahmad
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36608" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Ho, Steven
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36590" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Hon Sing, Yaw
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36571" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Ibrahim, Azurah
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36637" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Imran, Ariff
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36602" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Izayu, Noor
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36634" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+jusoh, natasya
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36636" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Kushnan, Thayalan
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="19562" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Leong, Kok Heng
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36580" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+LO, victor
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36582" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Loh, Karr Ven
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36603" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Low, Lawrence
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36616" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Mohammed Ali, Suhaila
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36570" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Mohd Azwan, Nur Farhanah
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36631" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Mohd Husaini, Muhammad Zul Afkar
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36592" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Mohd Najib, Syafiqah
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36600" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Mohd Rosli, Roshaliza
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="26187" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Niew, James
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36609" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Nizam, Syahirah
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36564" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+ou, rosalyn
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36589" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Perumal, Jaya Malini
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36565" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Raymundo, Alden
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36569" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Razif, Mohd
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36619" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Sahroni, Mohd Noranin Naim
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36435" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Seng Chee, Pow
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36614" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Sobiring, Muhammad Izzat
+</div>
+<div class="td js-status"></div>
+</div>
+
+<div class="flex-table__row classroom__lab__student-row" data-add-time-path="/lab_instances/update_duration.json" data-student="36628" data-lab-instance="null" data-lab-state="null" data-running="null" data-end-lab-path="null">
+<div class="td classroom__lab__student-row__select">
+<ql-icon-button class="js-select-student">check_box_outline_blank</ql-icon-button>
+</div>
+<div class="td">
+<ql-avatar class="l-mrm" size="32"></ql-avatar>
+Srang, Peter
+</div>
+<div class="td js-status"></div>
+</div>
+
+</div>
+<div role="navigation" aria-label="Pagination" class="pagination"><span class="previous_page disabled" aria-disabled="true">← Previous</span> <em class="current" aria-label="Page 1" aria-current="page">1</em> <a rel="next" aria-label="Page 2" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32694?page=2">2</a> <a class="next_page" rel="next" href="https://my-trainocate.qwiklabs.com/ilt/classrooms/5061/focuses/32694?page=2">Next →</a></div>
+</div>
+</div>
+
+
+</div>
+</div>
+
+</div>
+</div>
+</div>
+
+</div>
+</main>
+
+<span class="hidden" id="flash-sibling-before"></span>
+<ql-snackbar aria-live="polite" role="alert"></ql-snackbar>
+
+
+<div class="modal fade" id="classroom_student_quick_add">
+<div class="modal-container">
+<div class="modal-content mdl-shadow--24dp">
+<h4 class="modal-header">
+Add a Student
+</h4>
+<form class="simple_form edit_classroom" id="edit_classroom_5061" action="/classrooms/5061/addstudents" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓" autocomplete="off"><input type="hidden" name="authenticity_token" value="6y/xzapAio1d7+bLI2HI7+i54KH+6s/U7gTgLADmjMfI/pmjETceaJiBVJOuvm2wFRCyd3IQpisfcAsNNBGKjg==" autocomplete="off"><div class="modal-body">
+<div class="control-group string optional classroom_unenrolled_students"><div class="controls"><input placeholder="Student email address" class="string optional" type="text" name="classroom[unenrolled_student_ids]" id="classroom_unenrolled_student_ids"></div></div>
+</div>
+<div class="modal-actions">
+<a class="button button--text" data-dismiss="modal">
+Cancel
+</a>
+<input type="submit" name="commit" value="Add Student" class="button button--text" data-disable-with="Add Student">
+</div>
+</form>
+
+</div>
+</div>
+<iframe class="l-ie-iframe-fix" tabindex="-1" title="modal"></iframe>
+</div>
+<div class="modal fade" id="set_desired_hotlabs">
+<div class="modal-container">
+<div class="modal-content mdl-shadow--24dp">
+<h4 class="modal-header">
+Set desired hotlabs
+</h4>
+<form class="simple_form edit_classroom" id="edit_classroom_5061" action="/ilt/classrooms/5061" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓" autocomplete="off"><input type="hidden" name="_method" value="patch" autocomplete="off"><input type="hidden" name="authenticity_token" value="6y/xzapAio1d7+bLI2HI7+i54KH+6s/U7gTgLADmjMfI/pmjETceaJiBVJOuvm2wFRCyd3IQpisfcAsNNBGKjg==" autocomplete="off"><div class="modal-body">
+<div class="control-group integer optional classroom_desired_hot_labs"><label class="integer optional control-label" for="classroom_desired_hot_labs">Desired number of hotlabs</label><div class="controls"><input max="500" min="0" class="numeric integer optional" type="number" step="1" value="0" name="classroom[desired_hot_labs]" id="classroom_desired_hot_labs"></div></div>
+</div>
+<div class="modal-actions">
+<a class="button button--text" data-dismiss="modal">
+Cancel
+</a>
+<input type="submit" name="commit" value="Submit" class="button button--text" data-disable-with="Submit">
+</div>
+</form>
+
+</div>
+</div>
+<iframe class="l-ie-iframe-fix" tabindex="-1" title="modal"></iframe>
+</div>
+
+
+<script>
+  $(function() {
+    ql.initMaterialInputs();
+    initChosen();
+    initSearch();
+    initTabs();
+    ql.list.init();
+    ql.favoriting.init();
+    ql.header.myAccount.init();
+    initTooltips();
+    ql.autocomplete.init();
+    ql.modals.init();
+    ql.toggleButtons.init();
+    ql.analytics.init();
+    ql.initStudentCheckBoxListeners();
+  ql.initAddTimeListener();
+  ql.initEndLabListener();
+  ql.trainerClassroomView.init( "/ilt/classrooms/5061/focuses/32694.json" );
+  ql.trainerLabDragDrop.init();
+  ql.chat.init();
+  ql.navPanel.init();
+  ql.navigation.init();
+  
+  });
+</script>
+
+
+
+
+
+
+<iframe data-product="web_widget" title="No content" tabindex="-1" allow="microphone *" aria-hidden="true" style="width: 0px; height: 0px; border: 0px none; position: absolute; top: -9999px;" src="M05%20Getting%20Started%20with%20GKE%20Qwiklabs_files/a_004.html"></iframe><div><iframe title="Opens a widget where you can chat to one of our agents" id="launcher" tabindex="-1" style="width: 106px; height: 50px; padding: 0px; margin: 10px 20px; position: fixed; bottom: 30px; overflow: visible; opacity: 0; border: 0px none; z-index: 999998; transition-duration: 250ms; transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1); transition-property: opacity, top, bottom; top: -9999px; visibility: hidden;"></iframe></div></body></html>
